@@ -1,0 +1,19 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+main {
+    border: 1px black solid;
+    background-color: orange;
+    max-width: 1000;
+    min-width: 500;
+    margin: auto;
+}
