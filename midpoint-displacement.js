@@ -16,7 +16,6 @@ function main() {
 
 function createLayer(windowWidth, windowHeight, startHeight, 
                     roughness, color, scrollSpeed) {
-                        console.log(startHeight);
     let layerCanvas = document.createElement('canvas');
     document.body.appendChild(layerCanvas);
     let layerCtx = layerCanvas.getContext('2d');
