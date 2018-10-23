@@ -12,8 +12,6 @@ export class BackgroundRenderer implements CanvasRender {
         this.width = width;
         this.canvasLayers = [];
 
-        //let layer1Mountain = new MidpointDisplacementRenderer(this.height, this.width, this.height/2, 0.5, '#ff0000', 100);
-        //layer1Mountain.render();
         this.createMountainLayers();
     }
 
