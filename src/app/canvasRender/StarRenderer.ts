@@ -1,5 +1,6 @@
 import { CanvasRender } from "./canvasRender";
 import { Star } from "../objects/Star";
+import { ShootingStar } from "../objects/ShootingStar";
 
 export class StarRenderer implements CanvasRender {
 
@@ -9,14 +10,17 @@ export class StarRenderer implements CanvasRender {
     private canvas: HTMLCanvasElement;
     private canvasContext: CanvasRenderingContext2D;
     private starArray: Star [];
+    private shootingStarArray: ShootingStar [];
 
     constructor(height: number, width: number) {
         this.height = height;
         this.width = width;
         this.starArray = [];
+        this.shootingStarArray = [];
 
         this.initCanvasAndContext();
         this.initStars();
+        this.initShootingStars();
     }
 
     private initCanvasAndContext() {
@@ -33,6 +37,10 @@ export class StarRenderer implements CanvasRender {
         for(let i = 0; i < this.height; i++) {
             this.starArray.push(new Star(this.height, this.width));
         }
+    }
+
+    private initShootingStars() {
+        this.shootingStarArray.push(new ShootingStar(this.height, this.width));
     }
 
     render() {
@@ -52,6 +60,18 @@ export class StarRenderer implements CanvasRender {
         this.starArray.forEach(
             star => this.canvasContext.fillRect(star.getX(), star.getY(), star.getSize(), star.getSize())
         );
+
+        // Render all shooting stars
+        this.canvasContext.strokeStyle = '#ffffff';
+        this.shootingStarArray.forEach(
+            shootingStar => {
+                this.canvasContext.lineWidth = shootingStar.getSize();
+                this.canvasContext.beginPath();
+                this.canvasContext.moveTo(shootingStar.getX(), shootingStar.getY());
+                this.canvasContext.lineTo(shootingStar.getX() + shootingStar.getLength(), shootingStar.getY() - shootingStar.getLength());
+                this.canvasContext.stroke();
+            }
+        )
     }
 
     private setupRerender() {
@@ -61,6 +81,9 @@ export class StarRenderer implements CanvasRender {
                 this.starArray.forEach(
                     star => star.update()
                 );
+                this.shootingStarArray.forEach(
+                    shootingStar => shootingStar.update()
+                )
                 // Render again
                 this.paintBackground();
             }, 15
