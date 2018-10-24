@@ -22,7 +22,7 @@ export class BackgroundRenderer implements CanvasRender {
     }
 
     private createMountainLayers() {
-        let firstHeight = this.height / 2;
+        let firstHeight = this.height / 3;
         let inverseGoldenRatio = 0.618;
 
         this.createMountainLayer(this.height - firstHeight, 0.5, '#000000', 75);
