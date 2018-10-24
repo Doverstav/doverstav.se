@@ -1,7 +1,6 @@
 export class Star {
-    
-    private height;
-    private width;
+    readonly height;
+    readonly width;
 
     private size: number;
     private speed: number;
@@ -10,7 +9,7 @@ export class Star {
 
     constructor(backgroundHeight: number, backgroundWidth: number) {
         this.height = backgroundHeight;
-        this.width  = backgroundWidth;
+        this.width = backgroundWidth;
 
         this.initStar();
     }
@@ -27,7 +26,7 @@ export class Star {
         this.speed = Math.random() * .05;
     }
 
-    reset() {
+    private reset() {
         this.randomSizeAndSpeed();
 
         this.x = this.width;
