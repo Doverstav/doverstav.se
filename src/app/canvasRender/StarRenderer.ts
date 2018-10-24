@@ -41,6 +41,7 @@ export class StarRenderer implements CanvasRender {
 
     private initShootingStars() {
         this.shootingStarArray.push(new ShootingStar(this.height, this.width));
+        this.shootingStarArray.push(new ShootingStar(this.height, this.width));
     }
 
     render() {
