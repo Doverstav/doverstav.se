@@ -1,5 +1,6 @@
 import { MidpointDisplacementRenderer } from "./MidpointDisplacementRenderer";
 import { CanvasRender } from "./canvasRender";
+import { StarRenderer } from "./StarRenderer";
 
 export class BackgroundRenderer implements CanvasRender {
     readonly height: number;
@@ -12,7 +13,12 @@ export class BackgroundRenderer implements CanvasRender {
         this.width = width;
         this.canvasLayers = [];
 
+        this.createStarBackground();
         this.createMountainLayers();
+    }
+
+    private createStarBackground() {
+        this.canvasLayers.push(new StarRenderer(this.height, this.width));
     }
 
     private createMountainLayers() {
