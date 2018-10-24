@@ -25,6 +25,7 @@ export class StarRenderer implements CanvasRender {
         this.canvas.height = this.height;
         this.canvas.width = this.width;
 
+        // Append canvas to body
         document.body.appendChild(this.canvas);
     }
 
@@ -35,14 +36,35 @@ export class StarRenderer implements CanvasRender {
     }
 
     render() {
+        this.paintBackground();
+        this.setupRerender();
+    }
+
+    private paintBackground() {
         this.canvasContext.clearRect(0, 0, this.width, this.height);
+
+        // PAint background in one color
         this.canvasContext.fillStyle = '#110e19';
         this.canvasContext.fillRect(0, 0, this.width, this.height);
 
+        // Render all stars
         this.canvasContext.fillStyle = '#ffffff';
         this.starArray.forEach(
             star => this.canvasContext.fillRect(star.getX(), star.getY(), star.getSize(), star.getSize())
         );
+    }
+
+    private setupRerender() {
+        setInterval(
+            () => {
+                // Update star positions
+                this.starArray.forEach(
+                    star => star.update()
+                );
+                // Render again
+                this.paintBackground();
+            }, 15
+        )
     }
 
 }
