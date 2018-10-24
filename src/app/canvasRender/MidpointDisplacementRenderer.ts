@@ -29,7 +29,7 @@ export class MidpointDisplacementRenderer implements CanvasRender {
 
             this.initCanvasAndContext()
 
-            this.generateTerrain(this.renderpointsArray, 0, this.width, this.height / 4);
+            this.generateTerrain(this.renderpointsArray, 0, this.width, this.initialHeight / 4);
     }
 
     private initArray() {
