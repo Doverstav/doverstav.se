@@ -16,19 +16,31 @@ export class Star {
     }
 
     private initStar() {
-        this.size = Math.random() * 2;
-        this.speed = Math.random() * .05;
+        this.randomSizeAndSpeed();
 
         this.x = Math.random() * this.width;
         this.y = Math.random() * this.height;
     }
 
-    reset() {
+    private randomSizeAndSpeed() {
+        this.size = Math.random() * 2;
+        this.speed = Math.random() * .05;
+    }
 
+    reset() {
+        this.randomSizeAndSpeed();
+
+        this.x = this.width;
+        this.y = Math.random() * this.height;
     }
 
     update() {
-
+        // Update x-position
+        this.x = this.x - this.speed;
+        // If out of bounds, reset
+        if (this.x < 0) {
+            this.reset();
+        }
     }
 
     getX() {
