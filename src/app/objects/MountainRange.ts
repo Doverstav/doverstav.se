@@ -1,6 +1,6 @@
 import { CanvasObject } from "./CanvasObject";
 
-export class MidpointDisplacementRenderer implements CanvasObject {
+export class MountainRange implements CanvasObject {
 
     readonly canvasContext: CanvasRenderingContext2D;
 
@@ -63,7 +63,6 @@ export class MidpointDisplacementRenderer implements CanvasObject {
     render() {
         // Render object
         this.canvasContext.fillStyle = this.color;
-        this.canvasContext.clearRect(0, 0, this.width, this.height);
         this.canvasContext.beginPath();
         this.canvasContext.moveTo(0, this.renderpointsArray[0]);
 
