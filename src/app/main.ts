@@ -1,10 +1,9 @@
-import { MidpointDisplacementRenderer } from "./canvasRender/MidpointDisplacementRenderer";
-import { BackgroundRenderer } from "./canvasRender/BackgroundRenderer";
+import { CanvasRenderer } from "./canvasRender/CanvasRenderer";
 
 export class Main {
     main() {
-        let bgRenderer = new BackgroundRenderer(window.innerHeight, window.innerWidth);
-        bgRenderer.render();
+        let canvasRenderer = new CanvasRenderer(window.innerHeight, window.innerWidth);
+        canvasRenderer.renderCanvas();
     }
 }
 

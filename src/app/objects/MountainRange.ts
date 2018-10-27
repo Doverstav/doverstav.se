@@ -1,34 +1,32 @@
-import { CanvasRender } from "./canvasRender";
+import { CanvasObject } from "./CanvasObject";
 
-export class MidpointDisplacementRenderer implements CanvasRender {
-    readonly height: number;
-    readonly width: number;
+export class MountainRange implements CanvasObject {
 
+    readonly canvasContext: CanvasRenderingContext2D;
+
+    private height: number;
+    private width: number;
     private initialHeight: number;
     private color: string;
     private roughness: number;
-    private tickRate: number;
-
-    private canvas: HTMLCanvasElement;
-    private canvasContext: CanvasRenderingContext2D;
+    private updateDelay: number;
     private renderpointsArray: number [];
+    private timedOut: boolean;
 
 
-    constructor(height: number, width: number, 
+    constructor(canvasContext: CanvasRenderingContext2D, 
         initialHeight: number, roughness: number, 
-        color: string, tickRate: number) {
+        color: string, updateDelay: number) {
             // Set all variables
-            this.height = height;
-            this.width = width;
+            this.canvasContext = canvasContext;
+            this.height = this.canvasContext.canvas.height;
+            this.width = this.canvasContext.canvas.width;
             this.initialHeight = initialHeight;
             this.roughness = roughness;
             this.color = color;
-            this.tickRate = tickRate;
+            this.updateDelay = updateDelay;
 
-            this.initArray()
-
-            this.initCanvasAndContext()
-
+            this.initArray();
             this.generateTerrain(this.renderpointsArray, 0, this.width, this.initialHeight / 4);
     }
 
@@ -36,17 +34,6 @@ export class MidpointDisplacementRenderer implements CanvasRender {
         this.renderpointsArray = [];
         this.renderpointsArray[0] = this.initialHeight;
         this.renderpointsArray[this.width] = this.initialHeight;
-    }
-
-    private initCanvasAndContext() {
-        this.canvas = document.createElement('canvas');
-        this.canvasContext = this.canvas.getContext('2d');
-        this.canvas.height = this.height;
-        this.canvas.width = this.width;
-        this.canvasContext.fillStyle = this.color;
-
-        // Append canvas to body
-        document.body.appendChild(this.canvas);
     }
 
     private generateTerrain(array: number [], low: number, 
@@ -74,12 +61,8 @@ export class MidpointDisplacementRenderer implements CanvasRender {
     }
 
     render() {
-        this.paintTerrain();
-        this.setupRerender();
-    }
-
-    private paintTerrain() {
-        this.canvasContext.clearRect(0, 0, this.width, this.height);
+        // Render object
+        this.canvasContext.fillStyle = this.color;
         this.canvasContext.beginPath();
         this.canvasContext.moveTo(0, this.renderpointsArray[0]);
 
@@ -91,14 +74,21 @@ export class MidpointDisplacementRenderer implements CanvasRender {
         this.canvasContext.lineTo(0, this.height);
         this.canvasContext.closePath();
         this.canvasContext.fill();
+
+        // Update state
+        this.update();
     }
 
-    private setupRerender() {
-        setInterval(
-            () => {
-                this.renderpointsArray.push(this.renderpointsArray.shift());
-                this.paintTerrain();
-            }, this.tickRate
-        )
+    private update() {
+        if(!this.timedOut) {
+            // Update state
+            this.renderpointsArray.push(this.renderpointsArray.shift());
+
+            // Stop updating for now, resume in 'updateDelay' time
+            this.timedOut = true;
+            setTimeout(
+                _ => this.timedOut = false, this.updateDelay
+            )
+        }
     }
 }

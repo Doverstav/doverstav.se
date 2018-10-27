@@ -1,7 +1,11 @@
-export class ShootingStar {
-    readonly height: number;
-    readonly width: number;
+import { CanvasObject } from "./CanvasObject";
 
+export class ShootingStar implements CanvasObject {
+
+    readonly canvasContext: CanvasRenderingContext2D;
+
+    private height: number;
+    private width: number;
     private size: number;
     private speed: number;
     private length: number;
@@ -10,9 +14,11 @@ export class ShootingStar {
 
     private timedOut: boolean;
 
-    constructor(backgroundHeight: number, backgroundWidth: number) {
-        this.height = backgroundHeight;
-        this.width = backgroundWidth;
+    constructor(canvasContext: CanvasRenderingContext2D) {
+        this. canvasContext = canvasContext;
+
+        this.height = this.canvasContext.canvas.height;
+        this.width = this.canvasContext.canvas.width;
 
         this.initShootingStar();
     }
@@ -26,7 +32,7 @@ export class ShootingStar {
         this.length = (Math.random() * 80) + 10;
     }
 
-    update() {
+    private update() {
         if(!this.timedOut) {
             this.x = this.x - this.speed;
             this.y = this.y + this.speed;
@@ -45,19 +51,16 @@ export class ShootingStar {
         }
     }
 
-    getX() {
-        return this.x;
-    }
+    render() {
+        // Render object
+        this.canvasContext.strokeStyle = '#ffffff';
+        this.canvasContext.lineWidth = this.size;
+        this.canvasContext.beginPath();
+        this.canvasContext.moveTo(this.x, this.y);
+        this.canvasContext.lineTo(this.x + this.length, this.y - this.length);
+        this.canvasContext.stroke();
 
-    getY() {
-        return this.y;
-    }
-
-    getSize() {
-        return this.size;
-    }
-
-    getLength() {
-        return this.length;
+        // Update state
+        this.update();
     }
 }
