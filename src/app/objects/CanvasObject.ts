@@ -1,4 +1,4 @@
 export interface CanvasObject {
-    readonly canvasContext;
+    readonly canvasContext: CanvasRenderingContext2D;
     render();
 }
