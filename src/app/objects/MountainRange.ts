@@ -9,14 +9,14 @@ export class MountainRange implements CanvasObject {
     private initialHeight: number;
     private color: string;
     private roughness: number;
-    private tickRate: number;
+    private updateDelay: number;
     private renderpointsArray: number [];
     private timedOut: boolean;
 
 
     constructor(canvasContext: CanvasRenderingContext2D, 
         initialHeight: number, roughness: number, 
-        color: string, tickRate: number) {
+        color: string, updateDelay: number) {
             // Set all variables
             this.canvasContext = canvasContext;
             this.height = this.canvasContext.canvas.height;
@@ -24,7 +24,7 @@ export class MountainRange implements CanvasObject {
             this.initialHeight = initialHeight;
             this.roughness = roughness;
             this.color = color;
-            this.tickRate = tickRate;
+            this.updateDelay = updateDelay;
 
             this.initArray();
             this.generateTerrain(this.renderpointsArray, 0, this.width, this.initialHeight / 4);
@@ -84,10 +84,10 @@ export class MountainRange implements CanvasObject {
             // Update state
             this.renderpointsArray.push(this.renderpointsArray.shift());
 
-            // Stop updating for now, resume in 'tickrate' time
+            // Stop updating for now, resume in 'updateDelay' time
             this.timedOut = true;
             setTimeout(
-                _ => this.timedOut = false, this.tickRate
+                _ => this.timedOut = false, this.updateDelay
             )
         }
     }
