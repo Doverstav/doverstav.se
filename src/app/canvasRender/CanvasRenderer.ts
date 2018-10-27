@@ -4,6 +4,7 @@ import { Star } from "../objects/Star";
 import { ShootingStar } from "../objects/ShootingStar";
 import { MountainRange } from "../objects/MountainRange";
 import { CanvasRender } from "./canvasRender";
+import { PaletteUtil } from "../util/PaletteUtil";
 
 export class CanvasRenderer implements CanvasRender {
 
@@ -62,9 +63,11 @@ export class CanvasRenderer implements CanvasRender {
         let firstHeight = this.height / 3;
         let inverseGoldenRatio = 0.618;
 
-        this.canvasObjects.push(this.createMountain(this.height - firstHeight, 0.5, '#000000', 75))
-        this.canvasObjects.push(this.createMountain(this.height - (firstHeight * inverseGoldenRatio), 0.45, '#00057F', 65))
-        this.canvasObjects.push(this.createMountain(this.height - (firstHeight * inverseGoldenRatio * inverseGoldenRatio), 0.4, '#000AFF', 55))
+        let palette = PaletteUtil.getRandomPalette();
+
+        this.canvasObjects.push(this.createMountain(this.height - firstHeight, 0.5, palette.top, 75))
+        this.canvasObjects.push(this.createMountain(this.height - (firstHeight * inverseGoldenRatio), 0.45, palette.mid, 65))
+        this.canvasObjects.push(this.createMountain(this.height - (firstHeight * inverseGoldenRatio * inverseGoldenRatio), 0.4, palette.bot, 55))
     }
 
     private createMountain(initialHeight: number, roughness: number, color: string, tickrate: number) {
