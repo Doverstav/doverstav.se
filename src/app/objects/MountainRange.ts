@@ -11,6 +11,7 @@ export class MountainRange implements CanvasObject {
     private roughness: number;
     private updateDelay: number;
     private renderpointsArray: number [];
+    private nextScreenArray: number [];
     private timedOut: boolean;
 
 
@@ -26,14 +27,31 @@ export class MountainRange implements CanvasObject {
             this.color = color;
             this.updateDelay = updateDelay;
 
-            this.initArray();
-            this.generateTerrain(this.renderpointsArray, 0, this.width, this.initialHeight / 4);
+            this.initRenderArray();
+            this.initNextScreenArray();
+            
     }
 
-    private initArray() {
+    private initRenderArray() {
         this.renderpointsArray = [];
-        this.renderpointsArray[0] = this.initialHeight;
-        this.renderpointsArray[this.width] = this.initialHeight;
+        
+        this.renderpointsArray[0] = this.randomizeInitialHeight();
+        this.renderpointsArray[this.width] = this.randomizeInitialHeight();
+        
+        this.generateTerrain(this.renderpointsArray, 0, this.width, this.initialHeight / 4);
+    }
+
+    initNextScreenArray() {
+        this.nextScreenArray = [];
+
+        this.nextScreenArray[0] = this.renderpointsArray[this.width];
+        this.nextScreenArray[this.width] = this.randomizeInitialHeight();
+
+        this.generateTerrain(this.nextScreenArray, 0, this.width, this.initialHeight / 4);
+    }
+
+    private randomizeInitialHeight(): number {
+        return this.initialHeight + (Math.random() * (this.initialHeight / 5)) - (this.initialHeight / 10);
     }
 
     private generateTerrain(array: number [], low: number, 
@@ -82,7 +100,17 @@ export class MountainRange implements CanvasObject {
     private update() {
         if(!this.timedOut) {
             // Update state
-            this.renderpointsArray.push(this.renderpointsArray.shift());
+
+            // If we have used all of our 'next screen' elements
+            // Generate a new one
+            if(this.nextScreenArray.length === 0) {
+                this.initNextScreenArray();
+            }
+
+            // Remove first element from renderpoints
+            this.renderpointsArray.shift();
+            // Add first element from array that's on 'next screen'
+            this.renderpointsArray.push(this.nextScreenArray.shift());
 
             // Stop updating for now, resume in 'updateDelay' time
             this.timedOut = true;
