@@ -3,11 +3,12 @@ import { Background } from "../objects/Background";
 import { Star } from "../objects/Star";
 import { ShootingStar } from "../objects/ShootingStar";
 import { MountainRange } from "../objects/MountainRange";
+import { CanvasRender } from "./canvasRender";
 
-export class CanvasRenderer {
+export class CanvasRenderer implements CanvasRender {
 
-    private height;
-    private width;
+    readonly height;
+    readonly width;
 
     private canvas: HTMLCanvasElement;
     private canvasContext: CanvasRenderingContext2D;
@@ -23,11 +24,13 @@ export class CanvasRenderer {
     }
 
     private createCanvas() {
+        // Create canvas element
         this.canvas = document.createElement('canvas');
         this.canvasContext = this.canvas.getContext('2d');
         this.canvas.height = this.height;
         this.canvas.width = this.width;
 
+        // Attach to DOM
         document.body.appendChild(this.canvas);
     }
 
@@ -69,12 +72,19 @@ export class CanvasRenderer {
     }
 
     renderCanvas() {
+        // Save canvasContext state
         this.canvasContext.save();
+        // Render each object
         this.canvasObjects.forEach(
-            canvasObject => canvasObject.render()
+            canvasObject => {
+                canvasObject.render();
+                // Restore state so objects dont affect the rendering
+                // of other objects
+                this.canvasContext.restore();
+            }
         );
-        this.canvasContext.restore();
 
+        // Request new animationFrame so canvas is animated
         requestAnimationFrame(() => this.renderCanvas());
     }
 }
