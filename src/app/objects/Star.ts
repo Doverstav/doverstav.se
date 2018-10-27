@@ -1,15 +1,21 @@
-export class Star {
-    readonly height;
-    readonly width;
+import { CanvasObject } from "./CanvasObject";
 
+export class Star implements CanvasObject {
+    
+    readonly canvasContext: CanvasRenderingContext2D;
+    
+    private height;
+    private width;
     private size: number;
     private speed: number;
     private x: number;
     private y: number;
 
-    constructor(backgroundHeight: number, backgroundWidth: number) {
-        this.height = backgroundHeight;
-        this.width = backgroundWidth;
+    constructor(canvasContext: CanvasRenderingContext2D) {
+        this.canvasContext = canvasContext;
+
+        this.height = this.canvasContext.canvas.height;
+        this.width = this.canvasContext.canvas.width;
 
         this.initStar();
     }
@@ -33,7 +39,7 @@ export class Star {
         this.y = Math.random() * this.height;
     }
 
-    update() {
+    private update() {
         // Update x-position
         this.x = this.x - this.speed;
         // If out of bounds, reset
@@ -42,15 +48,12 @@ export class Star {
         }
     }
 
-    getX() {
-        return this.x;
-    }
+    render() {
+        // Render object
+        this.canvasContext.fillStyle = '#ffffff';
+        this.canvasContext.fillRect(this.x, this.y, this.size, this.size);
 
-    getY() {
-        return this.y;
-    }
-
-    getSize() {
-        return this.size;
+        // Update state
+        this.update();
     }
 }
