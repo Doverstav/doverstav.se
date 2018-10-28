@@ -44,6 +44,10 @@ main {
     grid-gap: 16px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .picture-container {
     grid-area: picture;
     height: 100%;
@@ -74,4 +78,10 @@ main {
 
 .info-footer {
     grid-area: info-footer;
+}
+
+.social-link {
+    height: 36px;
+    width: auto;
+    padding: 4px;
 }
