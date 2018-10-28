@@ -40,7 +40,7 @@ main {
     grid-template-areas:
         'picture info'
     ;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
 }
 
@@ -59,4 +59,19 @@ main {
     grid-area: info;
     height: 100%;
     width: 100%;
+
+    display: grid;
+    grid-template-areas:
+        'info'
+        'info-footer'
+    ;
+    grid-template-rows: 1fr auto;
+}
+
+.info {
+    grid-area: info;
+}
+
+.info-footer {
+    grid-area: info-footer;
 }
