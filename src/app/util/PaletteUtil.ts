@@ -15,7 +15,7 @@ export class PaletteUtil {
             bot: '#F96F5D'
         },
         { // Blue-gray palette
-            top: '#313E50',
+            top: '#333333',
             mid: '#3A435E',
             bot: '#3C6997',
         }
