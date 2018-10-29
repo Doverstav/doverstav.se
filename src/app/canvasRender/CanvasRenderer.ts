@@ -63,7 +63,7 @@ export class CanvasRenderer implements CanvasRender {
         let firstHeight = this.height / 3;
         let inverseGoldenRatio = 0.618;
 
-        let palette = PaletteUtil.getRandomPalette();
+        let palette = PaletteUtil.getPalette();
 
         this.canvasObjects.push(this.createMountain(this.height - firstHeight, 0.5, palette.top, 75))
         this.canvasObjects.push(this.createMountain(this.height - (firstHeight * inverseGoldenRatio), 0.45, palette.mid, 65))

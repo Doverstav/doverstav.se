@@ -2,6 +2,7 @@ import { Palette } from "./Palette";
 
 export class PaletteUtil {
 
+    private static palette: Palette;
     private static palettes: Palette [] = [
         { // Green palette
             top: '#0D5D56',
@@ -14,14 +15,17 @@ export class PaletteUtil {
             bot: '#F96F5D'
         },
         { // Blue-gray palette
-            top: '#3C6997',
+            top: '#313E50',
             mid: '#3A435E',
-            bot: '#313E50',
+            bot: '#3C6997',
         }
     ];
 
-    static getRandomPalette(): Palette {
-        return this.palettes[Math.floor(Math.random() * this.palettes.length)]
+    static getPalette(): Palette {
+        if(!this.palette) {
+            this.palette = this.palettes[Math.floor(Math.random() * this.palettes.length)]
+        }
+        return this.palette;
     }
 
 }
