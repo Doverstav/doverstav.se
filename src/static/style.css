@@ -21,6 +21,35 @@ canvas {
     z-index: -1;
 }
 
+@media only screen and (max-width: 768px) {
+    main {
+        display: grid;
+        grid-template-areas:
+            'picture'
+            'info'
+        ;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 16px;
+
+        max-width: 500px;
+        min-width: 350px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    main {
+        display: grid;
+        grid-template-areas:
+            'picture info'
+        ;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 16px;
+
+        max-width: 1000;
+        min-width: 500;
+    }
+}
+
 main {
     margin-top: 10%;
     margin-left: auto;
@@ -28,20 +57,10 @@ main {
 
     padding: 16px;
 
-    max-width: 1000;
-    min-width: 500;
-
     color: #DEE7E7;
     background-color: #202030; /*#242331;*/
 
     box-shadow: 0 0 25px 5px #DEE7E7;
-
-    display: grid;
-    grid-template-areas:
-        'picture info'
-    ;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 16px;
 }
 
 a {
