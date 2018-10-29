@@ -95,6 +95,21 @@ a {
     grid-area: info;
 }
 
+.info-title {
+    display: block;
+    font-size: 2em;
+}
+
+.info-subtitle {
+    display: block;
+    font-size: 1.5em;
+}
+
+.info-paragraph {
+    display: block;
+    margin-top: 1em;
+}
+
 .info-footer {
     grid-area: info-footer;
 }
