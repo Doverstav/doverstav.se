@@ -149,8 +149,8 @@ main {
 }
 
 @keyframes hide-panel {
-    from {bottom: 0; }
-    to { bottom: 200vh; }
+    from {bottom: 0; opacity: 1; }
+    to { bottom: 150vh; opacity: 0; }
 }
 
 .hide-panel-animation {
@@ -160,8 +160,8 @@ main {
 }
 
 @keyframes show-panel {
-    from {bottom: 200vh; }
-    to {bottom: 0; }
+    from {bottom: 150vh; opacity: 0;}
+    to {bottom: 0; opacity: 1; }
 }
 
 .show-panel-animation {
