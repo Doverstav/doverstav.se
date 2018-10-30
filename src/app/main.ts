@@ -17,22 +17,22 @@ export class Main {
     }
 
     setButtonEventListener() {
-        let actionButton: HTMLElement = document.querySelector('button#actionButton');
+        let actionButton: HTMLElement = document.querySelector('button#hideButton');
         console.log(actionButton);
         actionButton.onclick = (event) => this.handleActionButtonClick(event); 
     }
 
     handleActionButtonClick(event: MouseEvent) {
         let mainElement = document.querySelector('main');
-        if(mainElement.classList.contains('test-animation')) {
-            mainElement.classList.remove('test-animation');
+        if(mainElement.classList.contains('hide-panel-animation')) {
+            mainElement.classList.remove('hide-panel-animation');
             mainElement.classList.remove('main-margin-hidden');
             mainElement.classList.add('main-margin-top');
-            mainElement.classList.add('test-animation-revert');
+            mainElement.classList.add('show-panel-animation');
         } else {
-            mainElement.classList.remove('test-animation-revert');
+            mainElement.classList.remove('show-panel-animation');
             mainElement.classList.remove('main-margin-top');
-            mainElement.classList.add('test-animation');
+            mainElement.classList.add('hide-panel-animation');
             mainElement.classList.add('main-margin-hidden');
         }
     }
