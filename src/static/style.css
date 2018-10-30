@@ -45,13 +45,12 @@ canvas {
         grid-template-columns: 1fr 1fr;
         grid-gap: 16px;
 
-        max-width: 1000;
-        min-width: 500;
+        max-width: 1000px;
+        min-width: 500px;
     }
 }
 
 main {
-    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
 
@@ -61,6 +60,14 @@ main {
     background-color: #202030; /*#242331;*/
 
     box-shadow: 0 0 25px 5px #DEE7E7;
+}
+
+.main-margin-top {
+    margin-top: 10%;
+}
+
+.main-margin-hidden {
+    margin-top: -50%;
 }
 
 a {
@@ -118,4 +125,24 @@ a {
     height: 36px;
     width: auto;
     padding: 4px;
+}
+
+@keyframes test {
+    from {margin-top: 10%; }
+    to { margin-top: -50%; }
+}
+
+.test-animation {
+    animation-name: test;
+    animation-duration: 1s;
+}
+
+@keyframes test-revert {
+    from {margin-top: -50%; }
+    to {margin-top: 10%; }
+}
+
+.test-animation-revert {
+    animation-name: test-revert;
+    animation-duration: 1s;
 }
