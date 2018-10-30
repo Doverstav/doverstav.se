@@ -91,6 +91,10 @@ main {
     border: none;
 }
 
+.hide-button:hover {
+    cursor: pointer;
+}
+
 .picture-container {
     grid-area: picture;
     height: 100%;
