@@ -29,9 +29,7 @@ export class Main {
             // User requested to show panel
             // Remove css classes for hiding panel
             mainElement.classList.remove('hide-panel-animation');
-            mainElement.classList.remove('main-margin-hidden');
             // Add css classes for showing panel
-            mainElement.classList.add('main-margin-top');
             mainElement.classList.add('show-panel-animation');
             // Set button text
             button.innerText = 'Hide infopanel';
@@ -39,10 +37,8 @@ export class Main {
             // User requested to hide panel
             // Remove css classes for showing panel
             mainElement.classList.remove('show-panel-animation');
-            mainElement.classList.remove('main-margin-top');
             // Add css classes for hiding panel
             mainElement.classList.add('hide-panel-animation');
-            mainElement.classList.add('main-margin-hidden');
             // Set button text
             button.innerText = 'Show infopanel';
         }
