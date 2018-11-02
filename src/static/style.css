@@ -140,6 +140,7 @@ main {
 
 .info-footer {
     grid-area: info-footer;
+    text-align: right;
 }
 
 .social-link {
