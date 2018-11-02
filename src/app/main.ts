@@ -32,7 +32,7 @@ export class Main {
             // Add css classes for showing panel
             mainElement.classList.add('show-panel-animation');
             // Set button text
-            button.innerText = 'Hide infopanel';
+            button.innerText = 'Hide panel';
         } else {
             // User requested to hide panel
             // Remove css classes for showing panel
@@ -40,7 +40,7 @@ export class Main {
             // Add css classes for hiding panel
             mainElement.classList.add('hide-panel-animation');
             // Set button text
-            button.innerText = 'Show infopanel';
+            button.innerText = 'Show panel';
         }
     }
 }
